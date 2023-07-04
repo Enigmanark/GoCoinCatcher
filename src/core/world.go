@@ -20,8 +20,8 @@ func NewGameWorld() GameWorld {
 	return w
 }
 
-func (world *GameWorld) Update(delta float32) {
-
+func (world *GameWorld) Update(delta float64) {
+	world.currentScene.Update(delta)
 }
 
 func (world *GameWorld) Draw(surface *ebiten.Image) {

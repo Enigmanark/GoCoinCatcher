@@ -6,6 +6,7 @@ const (
 	C_SPATIAL = 2
 	C_IMAGE = 3
 	C_TEXT = 4
+	C_SUBIMAGE = 5
 )
 
 type Component interface {

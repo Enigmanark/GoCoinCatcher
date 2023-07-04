@@ -2,7 +2,6 @@ package engine
 
 import (
 	"log"
-	"time"
 
 	Core "github.com/Enigmanark/GoCoinCatcher/src/core"
 	"github.com/hajimehoshi/ebiten/v2"
@@ -15,7 +14,7 @@ type engine struct {
 	ScreenHeight int
 	WndowTitle string
 	World Core.GameWorld
-	lastTime int64
+	frameCount int
 }
 
 func Run() {
@@ -40,12 +39,8 @@ func newEngine() *engine {
 
 func (e *engine) Update() error {
 	//Calculate delta time
-	timeNow := time.Now().UnixNano()
-	deltaTime := float64(((timeNow - e.lastTime) / 1000000)) * 0.001
-	e.lastTime = timeNow
-	
-	delta := float32(deltaTime)
-	
+	var delta float64 = 1.0/60.0
+
 	//Update world
 	e.World.Update(delta)
 

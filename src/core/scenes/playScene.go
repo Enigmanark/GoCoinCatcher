@@ -25,8 +25,12 @@ func (p *playScene) Load() {
 	playerPos := comp.NewPositionComponent(10, 10)
 	player.AddComponent(&playerPos)
 
-	playerImage := comp.NewImageComponent("res/img/hero.png", 1)
+	playerImage := comp.NewSubImageComponent("res/img/hero.png", 32, 32, 1)
 	player.AddComponent(&playerImage)
+
+	playerVelocity := comp.NewVelocityComponent(1, 1)
+	playerVelocity.SetSpeed(50)
+	player.AddComponent(&playerVelocity)
 
 	p.entities = append(p.entities, player)
 
@@ -36,10 +40,10 @@ func (p *playScene) Unload() {
 
 }
 
-func (p *playScene) Update(delta float32) {
-
+func (p *playScene) Update(delta float64) {
+	sys.SystemUpdateMovers(p.entities, delta)
 }
 
 func (p *playScene) Draw(surface *ebiten.Image) {
-	sys.SystemRenderSprite(&p.entities, surface)
+	sys.SystemRenderSprite(p.entities, surface)
 }
